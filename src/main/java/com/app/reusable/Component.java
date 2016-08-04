@@ -5,13 +5,11 @@ import com.app.utils.PropertyLoader;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.io.Resources;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -48,7 +46,7 @@ public abstract class Component {
      */
     public WebElement getElement() {
         waitForRendered();
-        String id = waitForComponent();
+        //String id = waitForComponent();
         String xp = null;
         try {
             xp = returnXpath(_driver,"buildXpath.js");
