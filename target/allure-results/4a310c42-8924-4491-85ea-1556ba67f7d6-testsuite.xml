@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:test-suite start="1470202624586" stop="1470202640247" version="1.4.16" xmlns:ns2="urn:model.allure.qatools.yandex.ru">
+    <name>Command line suite : Command line test</name>
+    <title>Command line suite : Command line test</title>
+    <test-cases>
+        <test-case start="1470202624617" stop="1470202624627" status="pending">
+            <name>playButton3</name>
+            <failure>
+                <message>Test not implemented yet</message>
+                <stack-trace>There are no stack trace</stack-trace>
+            </failure>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="alienM14X"/>
+                <label name="thread" value="8000@alienM14X.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470202639694" stop="1470202639703" status="passed">
+            <name>TC01_Home</name>
+            <steps>
+                <step start="1470202635011" stop="1470202635017" status="passed">
+                    <name>initObjects</name>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+            <labels>
+                <label name="host" value="alienM14X"/>
+                <label name="thread" value="8000@alienM14X.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470202639729" stop="1470202639730" status="passed">
+            <name>TC02_Search</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="alienM14X"/>
+                <label name="thread" value="8000@alienM14X.main(1)"/>
+            </labels>
+        </test-case>
+    </test-cases>
+    <labels>
+        <label name="framework" value="TestNG"/>
+        <label name="language" value="JAVA"/>
+    </labels>
+</ns2:test-suite>

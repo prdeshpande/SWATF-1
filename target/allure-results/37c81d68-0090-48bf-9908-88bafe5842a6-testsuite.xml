@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:test-suite start="1470237803395" stop="1470238064390" version="1.4.12" xmlns:ns2="urn:model.allure.qatools.yandex.ru">
+    <name>Default Suite : SWATF</name>
+    <title>Default Suite : SWATF</title>
+    <test-cases>
+        <test-case start="1470237803660" stop="1470237803722" status="pending">
+            <name>playButton3</name>
+            <failure>
+                <message>Test not implemented yet</message>
+                <stack-trace>There are no stack trace</stack-trace>
+            </failure>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="L-156082704"/>
+                <label name="thread" value="6492@L-156082704.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470237879050" stop="1470238063268" status="passed">
+            <name>TC01_Home</name>
+            <steps>
+                <step start="1470237878374" stop="1470237878391" status="passed">
+                    <name>initObjects</name>
+                    <attachments/>
+                    <steps/>
+                </step>
+            </steps>
+            <attachments/>
+            <labels>
+                <label name="host" value="L-156082704"/>
+                <label name="thread" value="6492@L-156082704.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470238063278" stop="1470238063278" status="passed">
+            <name>TC02_Search</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="L-156082704"/>
+                <label name="thread" value="6492@L-156082704.main(1)"/>
+            </labels>
+        </test-case>
+    </test-cases>
+    <labels>
+        <label name="framework" value="TestNG"/>
+        <label name="language" value="JAVA"/>
+    </labels>
+</ns2:test-suite>
