@@ -12,7 +12,7 @@ public class TextField extends Component{
         super(driver, query, parent);
     }
 
-    public void enterValue(String value){
+    public void searchKeyword(String value){
         getElement().sendKeys(value);
     }
 }

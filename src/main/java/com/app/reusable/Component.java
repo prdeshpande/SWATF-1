@@ -159,28 +159,30 @@ public abstract class Component {
         return Conversion.StringToInt(property.loadProperty("implicitWait"));
     }
 
-    /*
 
-    @Override
     public void click() {
         getElement().click();
     }
+
+    public void sendKeys(CharSequence... keysToSend) {
+        getElement().sendKeys(keysToSend);
+
+    }
+
+    public void clear() {
+        getElement().clear();
+    }
+
+    /*
+
+
 
     @Override
     public void submit() {
         getElement().submit();
     }
 
-    @Override
-    public void sendKeys(CharSequence... keysToSend) {
-        getElement().sendKeys(keysToSend);
 
-    }
-
-    @Override
-    public void clear() {
-        getElement().clear();
-    }
 
     @Override
     public String getTagName() {

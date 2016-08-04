@@ -1,10 +1,9 @@
 package com.app.pom;
 
+import com.app.objects.Link;
 import com.app.objects.TextField;
 import com.app.testbase.PageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.io.IOException;
@@ -17,10 +16,8 @@ public class WebPage extends PageObject {
     /*
     * This is the old way to do POM
      */
-    @FindBy(id="search")
-    private WebElement searchBox;
-
-    public TextField searchField;
+    private TextField searchField;
+    private Link signIn;
 
     public WebPage(WebDriver driver, String url) throws IOException {
         super(driver, url);
@@ -30,5 +27,14 @@ public class WebPage extends PageObject {
     @Step
     public void initObjects(){
         searchField = new TextField(_driver,"input#search.input-text",null);
+        signIn = new Link(_driver,"a#pb_signin.utility-item-link",null);
+    }
+
+    public void search(String value){
+        searchField.searchKeyword(value);
+    }
+
+    public  void loginPage(){
+        signIn.click();
     }
 }
