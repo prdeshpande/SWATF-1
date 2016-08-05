@@ -5,7 +5,7 @@ import com.app.testbase.WebDriverBase;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.Assert;
-import org.testng.ITestResult;
+import org.testng.ITest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -46,28 +46,6 @@ public class WebPage2Test extends WebDriverBase{
         Assert.assertTrue(true);
     }
 
-    @AfterMethod
-    @Attachment(value = "Screenshot on failure captured", type = "image/png")
-    public byte[] screenCapture(ITestResult tr){
 
-        if(tr.getStatus()==ITestResult.FAILURE) {
-            String imgPath = "./target/" + tr.getName() + ".png";
-            String path = tr.getName() + ".png";
-            File screenshot = new File(imgPath);
-            try {
-                FileOutputStream screenshotStream = new FileOutputStream(screenshot);
-                byte[] bytes = ((TakesScreenshot) _driver)
-                        .getScreenshotAs(OutputType.BYTES);
-                screenshotStream.write(bytes);
-                screenshotStream.close();
-                return bytes;
-            } catch (IOException unableToWriteScreenshot) {
-                System.err.println("Unable to write "
-                        + screenshot.getAbsolutePath());
-                unableToWriteScreenshot.printStackTrace();
-            }
-        }
-        return null;
-    }
 
 }

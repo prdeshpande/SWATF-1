@@ -9,7 +9,6 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
@@ -90,14 +89,9 @@ public class WebDriverBase {
     protected void initPageObject(){}
 
 
-    @AfterClass
+    @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception{
         _driver.close();
-    }
-    @AfterSuite(alwaysRun = true)
-    public void stopAll() {
-        if (_driver != null) {
-            _driver.quit();
-        }
+        _driver.quit();
     }
 }
