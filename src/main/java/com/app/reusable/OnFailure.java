@@ -9,16 +9,23 @@ import ru.yandex.qatools.allure.annotations.Step;
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 08.09.14
  */
-public class OnFailure extends TestListenerAdapter {
+public class OnFailure extends TestListenerAdapter{
 
-    @Step("Hi, I'm step in your testng listener")
+
+
+    @Step("Failure captured, documented with: ")
     @Override
     public void onTestFailure(ITestResult tr) {
-        createAttachment();
+
+        createAttachment(tr);
+
+
     }
 
     @Attachment("Hi, I'm attachment in your testng listener")
-    public String createAttachment() {
-        return "My own attachment body!";
+    private String createAttachment(ITestResult tr) {
+        return tr.getName();
     }
+
+
 }
