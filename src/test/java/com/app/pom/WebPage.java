@@ -30,8 +30,9 @@ public class WebPage extends PageObject {
         signIn = new Link(_driver,"a#pb_signin.utility-item-link",null);
     }
 
+    @Step
     public void search(String value){
-        searchField.searchKeyword(value);
+        searchField.sendKeys(value);
     }
 
     public  void loginPage(){

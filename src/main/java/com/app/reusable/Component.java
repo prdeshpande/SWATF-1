@@ -29,6 +29,7 @@ public abstract class Component {
     protected String _HTMLID;
     protected WebElement _element;
     protected Component _parent = null;
+    private Boolean flag = false;
 
     @SuppressWarnings("unused")
     private int iWait;
@@ -45,16 +46,27 @@ public abstract class Component {
      * Get the WebElement using JQuery to be pass to WebDriver
      */
     public WebElement getElement() {
-        waitForRendered();
-        //String id = waitForComponent();
-        String xp = null;
-        try {
-            xp = returnXpath(_driver,"buildXpath.js");
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (waitForRendered()){
+            String xp = null;
+            try {
+                logger.info("Returning XPath...");
+                xp = returnXpath(_driver,"buildXpath.js");
+                logger.info("XPath build: "+xp);
+                return _driver.findElement(By.xpath(xp));
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+            //logger.info("Xpath value: "+xp);
+
+        }else{
+            logger.info("--------------------------------------------");
+            logger.info("No element found visible");
+            logger.info("--------------------------------------------");
+            return null;
         }
-        //logger.info("Xpath value: "+xp);
-        return _driver.findElement(By.xpath(xp));
+        //String id = waitForComponent();
+
     }
 
 
@@ -63,6 +75,7 @@ public abstract class Component {
             FluentWait<Component> wait = new FluentWait<Component>(this);
             String ret = wait
                     .withTimeout(this.getWait(),TimeUnit.SECONDS)
+                    .pollingEvery(250, TimeUnit.MILLISECONDS)
                     .ignoring(WebDriverException.class)
                     .until(new Function<Component, String>() {
                         public String apply(Component c) {
@@ -72,33 +85,35 @@ public abstract class Component {
                             return id;
                         }
                     });
-            // slow down to human speed. otherwise, test result is very
-            // sensitive to timing
-            Thread.sleep(100);
             return ret;
-        } catch (Exception e) {
+        } catch (TimeoutException e) {
             logger.debug("Exception found: "+ e.getMessage());
             e.printStackTrace();
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+            return null;
         }
     }
 
 
-    private void waitForRendered() {
+    private Boolean waitForRendered() {
         FluentWait<Component> wait = new FluentWait<Component>(this);
-        wait.withTimeout(this.getWait(),
-                TimeUnit.SECONDS).ignoring(WebDriverException.class)
-                .until(new Function<Component, Boolean>() {
-                    public Boolean apply(Component c) {
-                        String js = "return $('"+c.getFullQuery()+"').is(':visible');";
-                        return (Boolean) ((JavascriptExecutor) _driver).executeScript(js);
-                    }
-                });
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+       try{
+           wait
+                   .withTimeout(this.getWait(), TimeUnit.SECONDS)
+                   .ignoring(WebDriverException.class)
+                   .pollingEvery(250, TimeUnit.MILLISECONDS)
+                   .until(new Function<Component, Boolean>() {
+                       public Boolean apply(Component c) {
+                           String js = "return $('"+c.getFullQuery()+"').is(':visible');";
+                           return (Boolean) ((JavascriptExecutor) _driver).executeScript(js);
+                       }
+                   });
+           return true;
+       }catch (TimeoutException e){
+           //throw new RuntimeException(e);
+           return false;
+
+       }
     }
 
     protected String getFullQuery() {
@@ -108,7 +123,7 @@ public abstract class Component {
             query = parent._query + " " + query;
             parent = parent._parent;
         }
-        logger.info("Full query including Parent if exist: "+query);
+        //logger.info("Full query including Parent if exist: "+query);
         return query;
     }
 
@@ -128,31 +143,7 @@ public abstract class Component {
         }
         return (String) rXpath;
     }
-    /*
-    private String getXPathString(){
-        try {
-            FluentWait<Component> wait = new FluentWait<Component>(this);
-            String ret = wait
-                    .withTimeout(this.getWait(),TimeUnit.SECONDS)
-                    .ignoring(WebDriverException.class)
-                    .until(new Function<Component, String>() {
-                        public String apply(Component c) {
-                            String query = c.getFullQuery();
-                            String js = "getXpath("+ query + ");";
-                            String xp = (String) ((JavascriptExecutor) _driver).executeScript(js);
-                            return xp;
-                        }
-                    });
-            // slow down to human speed. otherwise, test result is very
-            // sensitive to timing
-            Thread.sleep(100);
-            return ret;
-        } catch (Exception e) {
-            logger.debug("Exception found: "+ e.getMessage());
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }*/
+
 
     public int getWait() {
 

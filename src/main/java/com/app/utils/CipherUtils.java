@@ -11,6 +11,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 
 
 import static javax.crypto.Cipher.getInstance;
@@ -40,9 +41,9 @@ public class CipherUtils {
         //initialize for encrypting
         try {
             byte[] encryptedVal = cipher.doFinal(value.getBytes());
-            returnStr = encryptedVal.toString();
+            returnStr = Arrays.toString(encryptedVal);
         } catch (IllegalBlockSizeException e) {
-            logger.error(e.getMessage());
+            logger.debug(e.getCause().getMessage());
             e.printStackTrace();
         } catch (BadPaddingException e) {
             logger.error(e.getMessage());

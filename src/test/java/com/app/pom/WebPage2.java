@@ -4,12 +4,8 @@ import com.app.objects.Button;
 import com.app.objects.TextField;
 import com.app.testbase.PageObject;
 import org.openqa.selenium.WebDriver;
-import org.testng.ITestResult;
-import org.testng.TestListenerAdapter;
-import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.allure.annotations.Step;
 
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -34,9 +30,10 @@ public class WebPage2 extends PageObject{
         loginBtn = new Button(_driver,"input#btnSubmit.button", null);
     }
 
+    @Step
     public void login(String user, String Password){
         username.sendKeys(user);
-        password.searchKeyword(Password);
+        password.sendKeys(Password);
         loginBtn.click();
     }
 
