@@ -1,24 +1,62 @@
 package com.app.reusable;
 
+import com.app.testbase.WebDriverBase;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.remote.Augmenter;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import ru.yandex.qatools.allure.annotations.Attachment;
 import ru.yandex.qatools.allure.annotations.Step;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 /**
  * @author Dmitry Baev charlie@yandex-team.ru
  *         Date: 08.09.14
  */
-public class OnFailure extends TestListenerAdapter {
+public class OnFailure extends TestListenerAdapter{
 
-    @Step("Hi, I'm step in your testng listener")
+
+
+    @Step("Failure captured, documented with: ")
     @Override
     public void onTestFailure(ITestResult tr) {
-        createAttachment();
+
+        createAttachment(tr);
+        screenCapture(tr);
+
     }
 
-    @Attachment("Hi, I'm attachment in your testng listener")
-    public String createAttachment() {
-        return "My own attachment body!";
+    @Attachment("Test Case Name:")
+    private String createAttachment(ITestResult tr) {
+        return tr.getName();
     }
+
+
+    @Attachment(value = "Screenshot Captured on failure !!", type = "image/png")
+    public byte[] screenCapture(ITestResult tr){
+
+        String imgPath = "./target/" + tr.getName() + ".png";
+        //String path = tr.getName() + ".png";
+        File screenshot = new File(imgPath);
+            try {
+                FileOutputStream screenshotStream = new FileOutputStream(screenshot, false);
+                WebDriver augmentedDriver = new Augmenter().augment((((WebDriverBase)tr.getInstance()).getDriver()));
+                byte[] bytes = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.BYTES);
+                screenshotStream.write(bytes);
+                screenshotStream.close();
+                return bytes;
+            } catch (IOException unableToWriteScreenshot) {
+                System.err.println("Unable to write "
+                        + screenshot.getAbsolutePath());
+                unableToWriteScreenshot.printStackTrace();
+            }
+        return null;
+    }
+
+
 }
