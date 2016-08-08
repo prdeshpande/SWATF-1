@@ -29,6 +29,8 @@ public class WebDriverBase {
     protected String firefoxBin;
     protected String chromeBinary;
     protected String chromeDriver;
+    protected String userName;
+    protected String password;
     public static final PropertyLoader property= new PropertyLoader();
 
     protected static final String BROWSER_CHROME    = "chrome";
@@ -43,6 +45,9 @@ public class WebDriverBase {
         websiteUrl = property.loadProperty("site.url");
         hubUrl = property.loadProperty("hub.address");
         browserName = property.loadProperty("browser.name");
+        userName = property.loadProperty("username.value");
+        password = property.loadProperty("password.value");
+
         DesiredCapabilities desiredCapabilities;
 
 
