@@ -1,17 +1,24 @@
 package com.app.testcases;
 
+import com.app.pom.DummyClass;
 import com.app.pom.WebPage_LoginPage;
 import com.app.pom.WebPage_SNHome;
 import com.app.testbase.PageObject;
 import com.app.testbase.WebDriverBase;
 
+import com.app.utils.JSHelper;
+import org.bouncycastle.crypto.RuntimeCryptoException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 
-import java.io.IOException;
+
 
 /**
  * Created by OS344312 on 8/8/2016.
@@ -20,8 +27,12 @@ import java.io.IOException;
 @Stories("Set of test that integrate the Smoke suite")
 public class SmokeTest extends WebDriverBase{
 
-    WebPage_LoginPage pageLP;
 
+    DummyClass dummyPage;
+    WebPage_LoginPage pageLP;
+    WebPage_SNHome pageSN;
+
+    private final static Logger logger = LoggerFactory.getLogger(SmokeTest.class);
 
     @BeforeClass
     public void testInit(){
@@ -37,26 +48,48 @@ public class SmokeTest extends WebDriverBase{
             pageLP = new WebPage_LoginPage(_driver, _driver.getCurrentUrl());
             _pageObject = pageLP;
             _pageObject.load();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    private void initPage(){
+        try{
+            pageSN = new WebPage_SNHome(_driver, _driver.getCurrentUrl());
+            _pageObject = pageSN;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
+
+    @BeforeMethod
+    public void injectJQ(){
+        JSHelper.injectJQ(_driver);
+        JSHelper.injectUS(_driver);
+        logger.info("Happening Before Test");
+        JSHelper.forceJQ(_driver);
+    }
+
+
+    @Test (groups = {"SmokeSuite"})
+    public void loginPage(){
+        if (_driver.getCurrentUrl().toLowerCase().toString() == "https://kohls.service-now.com/nav_to.do?uri=%2Fhome.do"){
+            // This is to skip login process if no redirection (Kohl's domain)
+            Assert.assertTrue(true);
+        }else {
+            pageLP.doLogin(userName, password);
         }
     }
 
 
 
-    @Test (groups = {"SmokeSuite"})
-    public void loginPage(){
-        pageLP.doLogin(userName,password);
-    }
-
-    /*
-
     @Test(groups={"SmokeSuite", "ServiceNow"}, description = "Looking for the Home Page Elements of the Service Now Home Page", dependsOnMethods = "loginPage")
     public void homePageCheck(){
-        pageHP.checkHomeLink();
-    }*/
+        initPage();
+        pageSN.checkHomeLink();
+    }
 
 
 }

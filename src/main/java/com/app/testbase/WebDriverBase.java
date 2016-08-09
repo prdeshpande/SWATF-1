@@ -96,7 +96,9 @@ public class WebDriverBase {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception{
-        _driver.close();
-        _driver.quit();
+        if (_driver != null) {
+            _driver.close();
+            _driver.quit();
+        }
     }
 }

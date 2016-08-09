@@ -25,13 +25,13 @@ public class WebPage_SNHome extends PageObject {
 
     @Step
     public void initObjects(){
-        checkIn = new Link(_driver,"h2:contains('Check In')",null);
-        findit = new Link(_driver,"h2:contains('Find it')",null);
+        checkIn = new Link(_driver,"a[id^=\"menu_\"]",null);
+        findit = new Link(_driver,"a[id^=\"menu_\"]:contains(\"'Order It\")",null);
     }
 
     @Step ("Home Link Verification")
     public void checkHomeLink(){
         checkIn.click();
-        findit.click();
+        //findit.click();
     }
 }

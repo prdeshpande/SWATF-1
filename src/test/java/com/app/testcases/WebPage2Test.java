@@ -4,6 +4,7 @@ import com.app.pom.WebPage2;
 import com.app.testbase.WebDriverBase;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 
@@ -13,6 +14,7 @@ import org.testng.annotations.Test;
  */
 public class WebPage2Test extends WebDriverBase{
     WebPage2 _page;
+
 
     @BeforeClass
     public void testInit(){
