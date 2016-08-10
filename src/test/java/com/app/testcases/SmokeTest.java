@@ -67,6 +67,7 @@ public class SmokeTest extends WebDriverBase{
     @BeforeMethod
     public void injectJQ(){
         JSHelper.injectJQ(_driver);
+
         JSHelper.injectUS(_driver);
         logger.info("Happening Before Test");
         JSHelper.forceJQ(_driver);
