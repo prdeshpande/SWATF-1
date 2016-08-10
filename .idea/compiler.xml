@@ -25,7 +25,7 @@
         <module name="SWATF" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.8">
       <module name="SWATF" target="1.7" />
     </bytecodeTargetLevel>
   </component>

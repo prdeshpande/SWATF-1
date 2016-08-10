@@ -52,9 +52,7 @@ public class PageObject {
      */
     public void load() throws IOException, InterruptedException {
         JSHelper.injectJQ(_driver);
-        JSHelper.injectUS(_driver);
-        // giving some time to complete the JS injection
-        Thread.sleep(500);
+        Thread.sleep(2000);
     }
 
 }

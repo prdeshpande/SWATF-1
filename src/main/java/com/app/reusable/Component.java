@@ -6,7 +6,6 @@ import com.app.utils.PropertyLoader;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.io.Resources;
-import com.google.common.primitives.Booleans;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.slf4j.Logger;
@@ -73,8 +72,14 @@ public abstract class Component {
     }
 
     private WebElement retryFunction() {
-        JSHelper.forceJQ(_driver);
-        return getElement();
+        retry++;
+        if (retry <2){
+            JSHelper.forceJQ(_driver);
+            return getElement();
+        }else{
+            return null;
+        }
+
     }
 
 

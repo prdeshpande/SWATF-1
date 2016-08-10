@@ -1,13 +1,9 @@
 package com.app.pom;
 
 import com.app.objects.Button;
-import com.app.objects.Link;
 import com.app.objects.TextField;
 import com.app.testbase.PageObject;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.BeforeGroups;
-import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.io.IOException;
@@ -27,7 +23,7 @@ public class WebPage_LoginPage extends PageObject{
         initObjects();
     }
 
-    @Step ("Objects initialization")
+    @Step ("Step 1: Objects initialization")
     public void initObjects(){
 
         username = new TextField(_driver,"input#form-username",null);
@@ -35,7 +31,7 @@ public class WebPage_LoginPage extends PageObject{
         submit = new Button(_driver,"input#btnSubmit.button",null);
     }
 
-    @Step ("Login function")
+    @Step ("Step 2: Perform login process")
     public void doLogin(String value1, String value2){
         username.sendKeys(value1);
         password.sendKeys(value2);

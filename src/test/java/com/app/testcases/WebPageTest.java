@@ -39,7 +39,7 @@ public class WebPageTest extends WebDriverBase{
     @Stories("Search Functionality")
     @Test(groups ={"smoke"}, testName = "TC01_Home")
     public void TC01_Home(){
-        _page.search("Nalgas");
+        _page.search("Summer");
     }
 
     @Stories("Root Search")

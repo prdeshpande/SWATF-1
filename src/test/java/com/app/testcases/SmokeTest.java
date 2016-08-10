@@ -3,17 +3,13 @@ package com.app.testcases;
 import com.app.pom.DummyClass;
 import com.app.pom.WebPage_LoginPage;
 import com.app.pom.WebPage_SNHome;
-import com.app.testbase.PageObject;
 import com.app.testbase.WebDriverBase;
-
 import com.app.utils.JSHelper;
-import org.bouncycastle.crypto.RuntimeCryptoException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
@@ -67,15 +63,14 @@ public class SmokeTest extends WebDriverBase{
     @BeforeMethod
     public void injectJQ(){
         JSHelper.injectJQ(_driver);
-
-        JSHelper.injectUS(_driver);
+        //JSHelper.injectUS(_driver);
         logger.info("Happening Before Test");
         JSHelper.forceJQ(_driver);
     }
 
 
-    @Test (groups = {"SmokeSuite"})
-    public void loginPage(){
+    @Test (groups = {"SmokeSuite"}, testName = "Redirection Login to Kohl's from web")
+    public void KohlsLoginFromWeb(){
         if (_driver.getCurrentUrl().toLowerCase().toString() == "https://kohls.service-now.com/nav_to.do?uri=%2Fhome.do"){
             // This is to skip login process if no redirection (Kohl's domain)
             Assert.assertTrue(true);
@@ -86,11 +81,20 @@ public class SmokeTest extends WebDriverBase{
 
 
 
-    @Test(groups={"SmokeSuite", "ServiceNow"}, description = "Looking for the Home Page Elements of the Service Now Home Page", dependsOnMethods = "loginPage")
-    public void homePageCheck(){
+    @Test(groups={"SmokeSuite", "ServiceNow"}, description = "Looking for the Home Page Elements of the Service Now Home Page", dependsOnMethods = "KohlsLoginFromWeb", testName = "Playing at Service Now Site")
+    public void ServiceNowNavigation(){
         initPage();
-        pageSN.checkHomeLink();
+        pageSN.findItLink();
+        pageSN.serviceCatalog();
+        pageSN.homeLink();
     }
+
+    @Test (groups = {"SmokeSuite"}, dependsOnMethods = "KohlsLoginFromWeb")
+    public void DemoFailureTest(){
+        initPage();
+        pageSN.mustFail();
+    }
+
 
 
 }
