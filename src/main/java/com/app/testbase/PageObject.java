@@ -23,7 +23,7 @@ public class PageObject {
     protected WebDriverWait _wait;
 
 
-    public static PropertyLoader property = new PropertyLoader();
+    public static final PropertyLoader property = new PropertyLoader();
 
     public String getURL() {
         return _url;

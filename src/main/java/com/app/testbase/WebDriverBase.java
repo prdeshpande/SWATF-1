@@ -11,7 +11,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,7 +38,7 @@ public class WebDriverBase {
     private final static Logger logger = LoggerFactory.getLogger(WebDriverBase.class);
 
     @BeforeClass
-    public void init() throws IOException, InterruptedException {
+    public void init()  {
 
         websiteUrl = property.loadProperty("site.url");
         hubUrl = property.loadProperty("hub.address");
@@ -77,7 +79,11 @@ public class WebDriverBase {
 
         logger.info(desiredCapabilities.getBrowserName());
 
-        _driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
+        try {
+            _driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
+        } catch (MalformedURLException e) {
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
+        }
         _driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         _driver.manage().window().maximize();
     }
@@ -89,11 +95,14 @@ public class WebDriverBase {
         return _driver;
     }
 
+    /*
+    * This method is empty to be Override
+     */
     protected void initPageObject(){}
 
 
     @AfterClass(alwaysRun = true)
-    public void tearDown() throws Exception{
+    public void tearDown(){
         if (_driver != null) {
             _driver.close();
             _driver.quit();

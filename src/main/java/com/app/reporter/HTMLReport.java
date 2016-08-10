@@ -1,20 +1,29 @@
 package com.app.reporter;
 
+import com.app.utils.JSHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.yandex.qatools.allure.annotations.Attachment;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by Oscar Garcia on 8/2/2016.
  */
 public class HTMLReport {
+
+    private final static Logger logger = LoggerFactory.getLogger(JSHelper.class);
+
     @Attachment("Request/Response")
     public static String attachReport(String strValue){
 
         return strValue;
     }
+
+
 
     public static void createReportProperties(){
         try{
@@ -28,7 +37,7 @@ public class HTMLReport {
             fw.close();
         }
         catch (IOException e){
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -44,7 +53,7 @@ public class HTMLReport {
             fw.close();
         }
         catch (IOException e){
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
     }
 }

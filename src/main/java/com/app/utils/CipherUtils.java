@@ -31,11 +31,9 @@ public class CipherUtils {
         try {
             cipher = getInstance("Blowfish");
         } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         } catch (NoSuchPaddingException e) {
-            logger.error(e.getMessage());
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
 
         //initialize for encrypting
@@ -43,11 +41,9 @@ public class CipherUtils {
             byte[] encryptedVal = cipher.doFinal(value.getBytes());
             returnStr = Arrays.toString(encryptedVal);
         } catch (IllegalBlockSizeException e) {
-            logger.debug(e.getCause().getMessage());
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         } catch (BadPaddingException e) {
             logger.error(e.getMessage());
-            e.printStackTrace();
         }
         return  returnStr;
 
@@ -60,11 +56,11 @@ public class CipherUtils {
             byte[] decrypted = cipher.doFinal(encryptedStr);
             returnStr = new String(decrypted);
         } catch (InvalidKeyException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         } catch (BadPaddingException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
         return returnStr;
     }

@@ -6,7 +6,7 @@
 
     <groupId>SWATF</groupId>
     <artifactId>SWATF</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.1-SNAPSHOT</version>
 
     <!-- Properties Block -->
     <properties>
@@ -24,6 +24,7 @@
             <artifactId>testng</artifactId>
             <version>6.9.9</version>
         </dependency>
+        <!-- Allure -->
         <dependency>
             <groupId>ru.yandex.qatools.allure</groupId>
             <artifactId>allure-testng-adaptor</artifactId>
@@ -60,6 +61,14 @@
             <artifactId>jfreechart</artifactId>
             <version>1.0.13</version>
         </dependency>
+        <!-- JaCoCO plugin -->
+        <!--
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.7.6.201602180812</version>
+        </dependency>
+        -->
     </dependencies>
 
 
@@ -75,14 +84,64 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+
+            <!--
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.7.6.201602180812</version>
+                <executions>
+                    <execution>
+                        <id>default-prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>default-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+
+                                <rule implementation="org.jacoco.maven.RuleConfiguration">
+                                    <element>BUNDLE</element>
+                                    <limits>
+
+                                        <limit implementation="org.jacoco.report.check.Limit">
+                                            <counter>COMPLEXITY</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.60</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.14</version>
                 <configuration>
+                    <failIfNoTests>false</failIfNoTests>
+                    <junitArtifactName>none:none</junitArtifactName>
+                    <testNGArtifactName>none:none</testNGArtifactName>
+                    <skipTests>true</skipTests>
+                    <!--
                     <includes>
                         <include>**/*.java</include>
                     </includes>
+                    -->
                     <groups>${group}</groups>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
@@ -120,6 +179,183 @@
 
         </plugins>
     </build>
+
+    <!-- Profile for the group of test -->
+    <profiles>
+        <profile>
+            <id>defaulttests</id>
+            <activation>
+                <property>
+                    <name>!testgroup</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <skipTests>false</skipTests>
+                                    <excludedGroups>slow,todo,db,web,selenium</excludedGroups>
+                                    <junitArtifactName>none:none</junitArtifactName>
+                                    <testNGArtifactName>org.testng:testng</testNGArtifactName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>dbtests</id>
+            <activation>
+                <property>
+                    <name>testgroup</name>
+                    <value>db</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <skipTests>false</skipTests>
+                                    <excludedGroups>slow,todo,web,selenium</excludedGroups>
+                                    <junitArtifactName>none:none</junitArtifactName>
+                                    <testNGArtifactName>org.testng:testng</testNGArtifactName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>webtests</id>
+            <activation>
+                <property>
+                    <name>testgroup</name>
+                    <value>web</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <skipTests>false</skipTests>
+                                    <excludedGroups>todo,selenium,db</excludedGroups>
+                                    <junitArtifactName>none:none</junitArtifactName>
+                                    <testNGArtifactName>org.testng:testng</testNGArtifactName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>alltests</id>
+            <activation>
+                <property>
+                    <name>testgroup</name>
+                    <value>all</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>test</phase>
+                                <goals>
+                                    <goal>test</goal>
+                                </goals>
+                                <configuration>
+                                    <skipTests>false</skipTests>
+                                    <excludedGroups>todo,selenium</excludedGroups>
+                                    <junitArtifactName>none:none</junitArtifactName>
+                                    <testNGArtifactName>org.testng:testng</testNGArtifactName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+
+    <!-- Profile for code coverage -->
+
+    <!-- Docs: http://www.eclemma.org/jacoco/trunk/doc/index.html -->
+        <profile>
+            <id>jacoco</id>
+            <properties>
+                <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+                <sonar.jacoco.reportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.reportPath>
+            </properties>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>jacoco-releases</id>
+                    <url>http://repo1.maven.org/maven2/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                </pluginRepository>
+            </pluginRepositories>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.6.0.201210061924</version>
+                        <!--
+                        <configuration>
+                            <destFile>${project.build.directory}/jacoco/jacoco.exec</destFile>
+                            <dataFile>${project.build.directory}/jacoco/jacoco.exec</dataFile>
+                        </configuration>
+                        -->
+                        <executions>
+                            <execution>
+                                <id>jacoco-initialize</id>
+                                <phase>initialize</phase>
+                                <goals>
+                                    <goal>prepare-agent</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>jacoco-report</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
+
     <reporting>
         <plugins>
             <plugin>

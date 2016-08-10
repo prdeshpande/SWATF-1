@@ -13,12 +13,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Oscar Garcia on 8/2/2016.
  */
-//public abstract class Component implements WebElement {
+
 public abstract class Component {
 
     private final static Logger logger = LoggerFactory.getLogger(Component.class);
@@ -31,11 +32,11 @@ public abstract class Component {
     protected String _HTMLID;
     protected WebElement _element;
     protected Component _parent = null;
-    private Boolean flag = false;
+
 
     @SuppressWarnings("unused")
     private int iWait;
-    public static PropertyLoader property = new PropertyLoader();
+    public static final PropertyLoader property = new PropertyLoader();
 
 
     public Component(WebDriver driver, String query, Component parent) {
@@ -56,19 +57,17 @@ public abstract class Component {
                 logger.info("XPath build: "+xp);
                 return _driver.findElement(By.xpath(xp));
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.info("Context", Arrays.toString(e.getStackTrace()));
                 return null;
-            }//logger.info("Xpath value: "+xp);
+            }
         }else{
             logger.info("--------------------------------------------");
             logger.info("No element found visible");
             logger.info("--------------------------------------------");
             logger.info("Injecting JQuery and trying again");
             logger.info("--------------------------------------------");
-            logger.info("Trying: "+ retry);
             return retryFunction();
         }
-        //String id = waitForComponent();
     }
 
     private WebElement retryFunction() {
@@ -100,9 +99,7 @@ public abstract class Component {
                     });
             return ret;
         } catch (TimeoutException e) {
-            logger.debug("Exception found: "+ e.getMessage());
-            e.printStackTrace();
-            //throw new RuntimeException(e);
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
             return null;
         }
     }
@@ -126,7 +123,7 @@ public abstract class Component {
                    });
            return checker;
        }catch (TimeoutException e){
-           //throw new RuntimeException(e);
+           logger.info("Context", Arrays.toString(e.getStackTrace()));
            return checker;
 
        }
@@ -139,7 +136,6 @@ public abstract class Component {
             query = parent._query + " " + query;
             parent = parent._parent;
         }
-        //logger.info("Full query including Parent if exist: "+query);
         return query;
     }
 
@@ -154,8 +150,7 @@ public abstract class Component {
             rXpath = je.executeScript(xpathStr.replaceAll("jqueryselector",getFullQuery()));
         }catch (Exception e){
             logger.error("Error during building XPath for JQuery String: "+ fileLib);
-            logger.error(e.getMessage());
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
         return (String) rXpath;
     }

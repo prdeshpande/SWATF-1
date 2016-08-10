@@ -5,6 +5,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.remote.Augmenter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 import ru.yandex.qatools.allure.annotations.Attachment;
@@ -13,6 +15,7 @@ import ru.yandex.qatools.allure.annotations.Step;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * @author Dmitry Baev charlie@yandex-team.ru
@@ -20,15 +23,13 @@ import java.io.IOException;
  */
 public class OnFailure extends TestListenerAdapter{
 
-
+    private final static Logger logger = LoggerFactory.getLogger(OnFailure.class);
 
     @Step("Failure captured, documented with: ")
     @Override
     public void onTestFailure(ITestResult tr) {
-
         createAttachment(tr);
         screenCapture(tr);
-
     }
 
     @Attachment("Test Case Name:")
@@ -51,9 +52,9 @@ public class OnFailure extends TestListenerAdapter{
                 screenshotStream.close();
                 return bytes;
             } catch (IOException unableToWriteScreenshot) {
-                System.err.println("Unable to write "
-                        + screenshot.getAbsolutePath());
-                unableToWriteScreenshot.printStackTrace();
+                System.err.println("Unable to write " + screenshot.getAbsolutePath());
+                logger.info("Context", Arrays.toString(unableToWriteScreenshot.getStackTrace()));
+
             }
         return null;
     }

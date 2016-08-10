@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -24,7 +25,11 @@ import java.util.concurrent.TimeUnit;
 public class JSHelper {
 
     private final static Logger logger = LoggerFactory.getLogger(JSHelper.class);
-    public static PropertyLoader property = new PropertyLoader();
+    public final static PropertyLoader property = new PropertyLoader();
+
+    private JSHelper(){
+
+    }
 
     public static String ensureLegalFileName(String filename) {
         String fn = filename.replace("\\", "%5C")
@@ -46,7 +51,7 @@ public class JSHelper {
         try {
             injectJS(driver, "return this.$ === undefined","jquery.js");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -55,7 +60,7 @@ public class JSHelper {
         try {
             injectJS(driver, "return this._ === undefined", "underscore.js");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -63,7 +68,7 @@ public class JSHelper {
         try {
             injectJS(driver, "return true","jquery.js");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
     }
     /*public static void injectJS (WebDriver driver, String jqueryString) throws IOException{
@@ -83,8 +88,7 @@ public class JSHelper {
                 logger.info("Injection of "+ fileLib+" success...");
             }catch (Exception e){
                 logger.error("Error during JS injection: "+ fileLib);
-                logger.error(e.getMessage());
-                e.printStackTrace();
+                logger.info("Context", Arrays.toString(e.getStackTrace()));
             }
         }
 
