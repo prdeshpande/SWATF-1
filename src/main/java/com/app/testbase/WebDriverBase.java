@@ -1,22 +1,34 @@
 package com.app.testbase;
 
+import com.app.testdata.ITestDataReader;
+import com.app.testdata.TestDataReaderFactory;
 import com.app.utils.PropertyLoader;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.ITestContext;
+import org.testng.annotations.*;
+import ru.yandex.qatools.allure.annotations.Attachment;
+import ru.yandex.qatools.allure.annotations.Features;
+import ru.yandex.qatools.allure.annotations.Stories;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Oscar Garcia on 8/2/2016.
  */
+@Features("Smoke Suite")
+@Stories("Set of test that integrate the Smoke suite")
 public class WebDriverBase {
     protected WebDriver _driver;
     protected String websiteUrl;
@@ -35,7 +47,7 @@ public class WebDriverBase {
 
     private final static Logger logger = LoggerFactory.getLogger(WebDriverBase.class);
 
-    @BeforeClass
+    //@BeforeClass
     public void init() throws IOException, InterruptedException {
 
         websiteUrl = property.loadProperty("site.url");
@@ -73,9 +85,7 @@ public class WebDriverBase {
 
         desiredCapabilities.setJavascriptEnabled(true);
         desiredCapabilities.setCapability("takesScreenshot", false);
-        desiredCapabilities.setBrowserName(desiredCapabilities.getBrowserName());
-
-        logger.info(desiredCapabilities.getBrowserName());
+        desiredCapabilities.setBrowserName(browserName);
 
         _driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
         _driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -94,9 +104,20 @@ public class WebDriverBase {
 
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception{
-        if (_driver != null) {
-            _driver.close();
-            _driver.quit();
-        }
+        _driver.close();
+        _driver.quit();
     }
+    
+    @DataProvider(name="testDataProvider")
+    public Object[][] testDataProvider(Method method, ITestContext testContext) {
+    	
+    	//testContext.
+    	
+    	String testDataSource = property.loadProperty("testdata.sourceType");
+    	
+    	ITestDataReader testDatReader = TestDataReaderFactory.getTestDataReader(testDataSource);
+    	
+    	return testDatReader.getTestData(method.getName());
+    }
+    
 }

@@ -2,6 +2,7 @@ package com.app.testcases;
 
 import com.app.pom.WebPage2;
 import com.app.testbase.WebDriverBase;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -12,7 +13,6 @@ import org.testng.annotations.Test;
  */
 public class WebPage2Test extends WebDriverBase{
     WebPage2 _page;
-
 
     @BeforeClass
     public void testInit(){
@@ -33,9 +33,10 @@ public class WebPage2Test extends WebDriverBase{
         }
     }
 
-    @Test(groups ={"smoke"}, testName = "TC03_HomePage", enabled = false)
+    @Test(groups ={"smoke"}, testName = "TC03_HomePage")
     public void TC03_HomePage() throws InterruptedException {
         _page.login("tkmad3j","F3rn4nd4");
+        Assert.assertTrue(true);
     }
 
 

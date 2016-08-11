@@ -51,8 +51,12 @@ public class PageObject {
      * @throws InterruptedException
      */
     public void load() throws IOException, InterruptedException {
+        logger.info("Injecting JS on Client: In Progress");
         JSHelper.injectJQ(_driver);
-        Thread.sleep(2000);
+        JSHelper.injectUS(_driver);
+        logger.info("Injection JS on Client: Complete");
+        //Often times, the page will get some initial configuration before it's ready.
+        //Utils.waitForJS(_driver);
     }
 
 }

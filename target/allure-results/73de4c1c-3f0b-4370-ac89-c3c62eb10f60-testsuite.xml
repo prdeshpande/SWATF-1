@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:test-suite start="1470803397742" stop="1470803398580" version="1.4.16" xmlns:ns2="urn:model.allure.qatools.yandex.ru">
+    <name>Default suite : Default test</name>
+    <title>Default suite : Default test</title>
+    <test-cases>
+        <test-case start="1470803397919" stop="1470803397950" status="passed">
+            <name>test[[Ljava.lang.String;@35f3a22c]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398296" stop="1470803398306" status="passed">
+            <name>test[[Ljava.lang.String;@3421debd]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398315" stop="1470803398322" status="passed">
+            <name>test[[Ljava.lang.String;@68b7d0ef]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398336" stop="1470803398344" status="passed">
+            <name>test[[Ljava.lang.String;@4a070cf0]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398350" stop="1470803398359" status="passed">
+            <name>test[[Ljava.lang.String;@202d9236]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398365" stop="1470803398370" status="passed">
+            <name>test[[Ljava.lang.String;@6d6ac396]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398383" stop="1470803398402" status="passed">
+            <name>test[[Ljava.lang.String;@f5a7226]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398410" stop="1470803398416" status="passed">
+            <name>test[[Ljava.lang.String;@6ad1701a]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398422" stop="1470803398429" status="passed">
+            <name>test[[Ljava.lang.String;@22da2fe6]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398442" stop="1470803398455" status="passed">
+            <name>test[[Ljava.lang.String;@713a35c5]</name>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+        <test-case start="1470803398474" stop="1470803398488" status="broken">
+            <name>tearDown</name>
+            <description>@AfterClass</description>
+            <failure>
+                <message>NullPointerException: null</message>
+                <stack-trace>java.lang.NullPointerException
+	at com.app.testbase.WebDriverBase.tearDown(WebDriverBase.java:107)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:85)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:510)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:211)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:138)
+	at org.testng.internal.TestMethodWorker.invokeAfterClassMethods(TestMethodWorker.java:220)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:111)
+	at org.testng.TestRunner.privateRun(TestRunner.java:774)
+	at org.testng.TestRunner.run(TestRunner.java:624)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:359)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:354)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:312)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:261)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1215)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1140)
+	at org.testng.TestNG.run(TestNG.java:1048)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:126)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:152)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:57)
+</stack-trace>
+            </failure>
+            <steps/>
+            <attachments/>
+            <labels>
+                <label name="host" value="jai-sri-ram"/>
+                <label name="thread" value="21820@jai-sri-ram.main(1)"/>
+            </labels>
+        </test-case>
+    </test-cases>
+    <labels>
+        <label name="framework" value="TestNG"/>
+        <label name="language" value="JAVA"/>
+    </labels>
+</ns2:test-suite>

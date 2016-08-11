@@ -1,7 +1,6 @@
 package com.app.reusable;
 
 import com.app.utils.Conversion;
-import com.app.utils.JSHelper;
 import com.app.utils.PropertyLoader;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
@@ -23,7 +22,6 @@ public abstract class Component {
 
     private final static Logger logger = LoggerFactory.getLogger(Component.class);
     protected WebDriver _driver;
-    protected int retry=0;
     /**
      * ExtJS component query that can uniquely identify this component.
      */
@@ -58,27 +56,16 @@ public abstract class Component {
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
-            }//logger.info("Xpath value: "+xp);
+            }
+            //logger.info("Xpath value: "+xp);
+
         }else{
             logger.info("--------------------------------------------");
             logger.info("No element found visible");
             logger.info("--------------------------------------------");
-            logger.info("Injecting JQuery and trying again");
-            logger.info("--------------------------------------------");
-            logger.info("Trying: "+ retry);
-            return retryFunction();
-        }
-        //String id = waitForComponent();
-    }
-
-    private WebElement retryFunction() {
-        retry++;
-        if (retry <2){
-            JSHelper.forceJQ(_driver);
-            return getElement();
-        }else{
             return null;
         }
+        //String id = waitForComponent();
 
     }
 
@@ -109,25 +96,22 @@ public abstract class Component {
 
 
     private Boolean waitForRendered() {
-
         FluentWait<Component> wait = new FluentWait<Component>(this);
-        Boolean checker=false;
        try{
-           checker =wait
+           wait
                    .withTimeout(this.getWait(), TimeUnit.SECONDS)
                    .ignoring(WebDriverException.class)
-                   .pollingEvery(450, TimeUnit.MILLISECONDS)
+                   .pollingEvery(250, TimeUnit.MILLISECONDS)
                    .until(new Function<Component, Boolean>() {
                        public Boolean apply(Component c) {
-                           String js = "return $('"+getFullQuery()+"').is(':visible');";
-                           logger.info("Searching for element: $('"+getFullQuery()+"').is(':visible')");
+                           String js = "return $('"+c.getFullQuery()+"').is(':visible');";
                            return (Boolean) ((JavascriptExecutor) _driver).executeScript(js);
                        }
                    });
-           return checker;
+           return true;
        }catch (TimeoutException e){
            //throw new RuntimeException(e);
-           return checker;
+           return false;
 
        }
     }
@@ -153,7 +137,7 @@ public abstract class Component {
             //String xpathStr = FileUtils.readFileToString(new File(fileLib));
             rXpath = je.executeScript(xpathStr.replaceAll("jqueryselector",getFullQuery()));
         }catch (Exception e){
-            logger.error("Error during building XPath for JQuery String: "+ fileLib);
+            logger.error("Error during JS injection: "+ fileLib);
             logger.error(e.getMessage());
             e.printStackTrace();
         }

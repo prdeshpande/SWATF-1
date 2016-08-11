@@ -41,30 +41,14 @@ public class JSHelper {
         return fn;
     }
 
-    public static void injectJQ (WebDriver driver){
+    public static void injectJQ (WebDriver driver) throws IOException{
         logger.info("Injecting JQuery.js ...");
-        try {
-            injectJS(driver, "return this.$ === undefined","jquery.js");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        injectJS(driver, "return this.$ === undefined","jquery.js");
     }
 
-    public static void injectUS (WebDriver driver){
+    public static void injectUS (WebDriver driver) throws IOException{
         logger.info("Injecting underscore.js ...");
-        try {
-            injectJS(driver, "return this._ === undefined", "underscore.js");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void forceJQ (WebDriver driver){
-        try {
-            injectJS(driver, "return true","jquery.js");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        injectJS(driver, "return this._ === undefined", "underscore.js");
     }
     /*public static void injectJS (WebDriver driver, String jqueryString) throws IOException{
         logger.info("Injecting buildXpath.js ...");
@@ -80,7 +64,6 @@ public class JSHelper {
                 URL _url = Resources.getResource(fileLib);
                 js = Resources.toString(_url, Charsets.UTF_8);
                 je.executeScript(js);
-                logger.info("Injection of "+ fileLib+" success...");
             }catch (Exception e){
                 logger.error("Error during JS injection: "+ fileLib);
                 logger.error(e.getMessage());
