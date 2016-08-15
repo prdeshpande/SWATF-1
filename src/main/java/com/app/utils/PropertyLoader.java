@@ -20,7 +20,7 @@ public class PropertyLoader {
 		ResourceBundle _prop = null;
 		String value=null;
 		try{
-			_prop = ResourceBundle.getBundle("SWAFT");
+			_prop = ResourceBundle.getBundle("SWATF");
 			value = _prop.getString(property);
 
 		}catch(Exception e){

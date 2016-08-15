@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -175,79 +176,49 @@ public abstract class Component {
         getElement().clear();
     }
 
-    /*
 
-
-
-    @Override
     public void submit() {
         getElement().submit();
     }
 
-
-
-    @Override
     public String getTagName() {
         return getElement().getTagName();
     }
 
-    @Override
+
     public String getAttribute(String name) {
         return getElement().getAttribute(name);
     }
 
-    @Override
+
     public boolean isSelected() {
         return getElement().isSelected();
     }
 
-    @Override
+
     public boolean isEnabled() {
         return getElement().isEnabled();
     }
 
-    @Override
+
     public String getText() {
         return getElement().getText();
     }
 
-    @Override
+
     public List<WebElement> findElements(By by) {
         return getElement().findElements(by);
     }
 
-    @Override
+
     public WebElement findElement(By by) {
         return getElement().findElement(by);
     }
 
-    @Override
+
     public boolean isDisplayed() {
         return getElement().isDisplayed();
     }
-
-    @Override
-    public Point getLocation() {
-        return getElement().getLocation();
-    }
-
-    @Override
-    public Dimension getSize() {
-        return getElement().getSize();
-    }
-
-    @Override
-    public Rectangle getRect(){return getElement().getRect();}
-
-    @Override
-    public String getCssValue(String propertyName) {
-        return getElement().getCssValue(propertyName);
-    }
-    */
-
-
-
-
 
 
 }

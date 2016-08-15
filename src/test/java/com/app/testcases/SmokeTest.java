@@ -13,6 +13,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
+//import org.junit.Test;
 
 
 
@@ -69,6 +70,7 @@ public class SmokeTest extends WebDriverBase{
     }
 
 
+    @org.junit.Test
     @Test (groups = {"SmokeSuite"}, testName = "Redirection Login to Kohl's from web")
     public void KohlsLoginFromWeb(){
         if (_driver.getCurrentUrl().toLowerCase().toString() == "https://kohls.service-now.com/nav_to.do?uri=%2Fhome.do"){
@@ -79,8 +81,7 @@ public class SmokeTest extends WebDriverBase{
         }
     }
 
-
-
+    @org.junit.Test
     @Test(groups={"SmokeSuite", "ServiceNow"}, description = "Looking for the Home Page Elements of the Service Now Home Page", dependsOnMethods = "KohlsLoginFromWeb", testName = "Playing at Service Now Site")
     public void ServiceNowNavigation(){
         initPage();
@@ -89,6 +90,7 @@ public class SmokeTest extends WebDriverBase{
         pageSN.homeLink();
     }
 
+    @org.junit.Test
     @Test (groups = {"SmokeSuite"}, dependsOnMethods = "KohlsLoginFromWeb")
     public void DemoFailureTest(){
         initPage();

@@ -303,9 +303,9 @@
         </profile>
 
 
-    <!-- Profile for code coverage -->
+        <!-- Profile for code coverage -->
 
-    <!-- Docs: http://www.eclemma.org/jacoco/trunk/doc/index.html -->
+        <!-- Docs: http://www.eclemma.org/jacoco/trunk/doc/index.html -->
         <profile>
             <id>jacoco</id>
             <properties>
@@ -378,6 +378,4 @@
             </plugin>
         </plugins>
     </reporting>
-
-
 </project>
