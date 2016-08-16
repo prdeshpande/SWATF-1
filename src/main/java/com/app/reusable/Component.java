@@ -81,7 +81,7 @@ public abstract class Component {
 
     }
 
-
+/*
     private String waitForComponent() {
         try {
             FluentWait<Component> wait = new FluentWait<Component>(this);
@@ -103,7 +103,7 @@ public abstract class Component {
             return null;
         }
     }
-
+*/
 
     private Boolean waitForRendered() {
 
@@ -126,7 +126,6 @@ public abstract class Component {
        }catch (TimeoutException e){
            logger.info("Context", Arrays.toString(e.getStackTrace()));
            return checker;
-
        }
     }
 

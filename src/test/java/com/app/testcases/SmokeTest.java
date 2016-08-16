@@ -34,18 +34,15 @@ public class SmokeTest extends WebDriverBase{
     @BeforeClass
     public void testInit(){
         // Load of the initial Web URL
-        getDriver().get(websiteUrl);
-        //_driver.get(websiteUrl);
-        // Initialization of the page to create the objects
+        WebDriverBase.getDriver().get(websiteUrl);
         initPageObject();
     }
 
     @Override
     protected void initPageObject(){
         try{
-            pageLP = new WebPage_LoginPage(getDriver(), getDriver().getCurrentUrl());
+            pageLP = new WebPage_LoginPage(WebDriverBase.getDriver(), WebDriverBase.getDriver().getCurrentUrl());
             _pageObject = pageLP;
-           // _pageObject.load();
         } catch (Exception e) {
             logger.info("Context", Arrays.toString(e.getStackTrace()));
             throw new RuntimeException();
@@ -54,7 +51,7 @@ public class SmokeTest extends WebDriverBase{
 
     private void initPage(){
         try{
-            pageSN = new WebPage_SNHome(getDriver(), getDriver().getCurrentUrl());
+            pageSN = new WebPage_SNHome(WebDriverBase.getDriver(), WebDriverBase.getDriver().getCurrentUrl());
             _pageObject = pageSN;
         }catch (Exception e){
             logger.info("Context", Arrays.toString(e.getStackTrace()));
@@ -64,10 +61,10 @@ public class SmokeTest extends WebDriverBase{
 
     @BeforeMethod
     public void injectJQ(){
-        JSHelper.injectJQ(getDriver());
+        JSHelper.injectJQ(WebDriverBase.getDriver());
         //JSHelper.injectUS(_driver);
         logger.info("Happening Before Test");
-        JSHelper.forceJQ(getDriver());
+        JSHelper.forceJQ(WebDriverBase.getDriver());
     }
 
 

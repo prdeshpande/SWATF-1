@@ -38,18 +38,4 @@ public class WebPage_LoginPage extends PageObject{
         submit.click();
     }
 
-    // Initialization of the pages needed to run the smoke suite
-    /*@BeforeGroups("ServiceNow")
-    public void groupInit(){
-        try {
-            pageHP = new WebPage_SNHome(_driver, _driver.getCurrentUrl());
-            _page = pageHP;
-            _page.load();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }*/
 }
