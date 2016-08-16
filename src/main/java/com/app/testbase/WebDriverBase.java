@@ -14,7 +14,8 @@ public class WebDriverBase {
     static ThreadLocal<WebDriver> threadDriver= new ThreadLocal<>();
     protected WebDriver _driver;
     protected String websiteUrl;
-    protected String hubUrl;
+    protected static String userName;
+    protected static String password;
 
     public static final PropertyLoader property= new PropertyLoader();
 
@@ -23,9 +24,9 @@ public class WebDriverBase {
 
     @BeforeClass
     public void init()  {
-        logger.info("Thread id = "+ Thread.currentThread().getId());
-        logger.info("Hashcode of Web Driver: "+WebDriverBase.getDriver().hashCode());
-        WebDriverBase.getDriver();
+        userName = property.loadProperty("username.value");
+        password = property.loadProperty("password.value");
+        websiteUrl = property.loadProperty("site.url");
     }
 
     // Implementation of page object
@@ -33,7 +34,6 @@ public class WebDriverBase {
 
     public  static WebDriver getDriver(){
         return threadDriver.get();
-        //return _driver;
     }
 
     public static void setDriver(WebDriver driver){
