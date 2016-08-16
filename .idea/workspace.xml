@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3d8cf7cd-f1fb-4951-9117-5adf452ab00d" name="Default" comment="Driver as Thread">
+    <list default="true" id="3d8cf7cd-f1fb-4951-9117-5adf452ab00d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/app/objects/Link.class" afterPath="$PROJECT_DIR$/target/classes/com/app/objects/Link.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/app/objects/TextField.class" afterPath="$PROJECT_DIR$/target/classes/com/app/objects/TextField.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/app/utils/JSHelper.class" afterPath="$PROJECT_DIR$/target/classes/com/app/utils/JSHelper.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SWATF.iml" afterPath="$PROJECT_DIR$/SWATF.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/app/reusable/Component.java" afterPath="$PROJECT_DIR$/src/main/java/com/app/reusable/Component.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/app/testbase/WebDriverBase.java" afterPath="$PROJECT_DIR$/src/main/java/com/app/testbase/WebDriverBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/SWATF.properties" afterPath="$PROJECT_DIR$/src/main/resources/SWATF.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/app/pom/WebPage_LoginPage.java" afterPath="$PROJECT_DIR$/src/test/java/com/app/pom/WebPage_LoginPage.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/app/testcases/SmokeTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/app/testcases/SmokeTest.java" />
     </list>
     <ignored path="SWATF.iws" />
@@ -82,8 +75,8 @@
       <file leaf-file-name="SmokeTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/app/testcases/SmokeTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+            <state relative-caret-position="504">
+              <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1026,7 +1019,14 @@
       <option name="project" value="LOCAL" />
       <updated>1471325657372</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Thread WebDriver">
+      <created>1471330813449</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1471330813449</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1110,7 +1110,8 @@
     <MESSAGE value="Updates on Test SmokeSuite to have Allure Report" />
     <MESSAGE value="Updates to use getDriver to pass the WebDriver in preparation for Thread" />
     <MESSAGE value="Driver as Thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="Driver as Thread" />
+    <MESSAGE value="Thread WebDriver" />
+    <option name="LAST_COMMIT_MESSAGE" value="Thread WebDriver" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1453,8 +1454,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/app/testcases/SmokeTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        <state relative-caret-position="504">
+          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

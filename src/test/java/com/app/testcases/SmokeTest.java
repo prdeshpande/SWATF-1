@@ -46,6 +46,7 @@ public class SmokeTest extends WebDriverBase{
         } catch (Exception e) {
             logger.info("Context", Arrays.toString(e.getStackTrace()));
             throw new RuntimeException();
+
         }
     }
 
