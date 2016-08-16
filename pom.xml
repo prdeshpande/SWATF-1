@@ -143,10 +143,10 @@
                     </includes>
 
                     <!-- <groups>${group}</groups> -->
-                    <threadCount>3</threadCount>
+                    <threadCount>2</threadCount>
                     <perCoreThreadCount>true</perCoreThreadCount>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <parallel>classes</parallel>
+                    <parallel>methods</parallel>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>

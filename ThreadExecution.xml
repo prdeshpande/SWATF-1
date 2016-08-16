@@ -1,0 +1,10 @@
+<suite name="Implenting Threads" parallel="methods" >
+    <test name="Test" group-by-instances="true">
+        <listeners>
+            <listener class-name="com.app.testbase.WebDriverListener"></listener>
+        </listeners>
+        <classes>
+            <class name="com.app.testcases.SmokeTest" />
+        </classes>
+    </test>
+</suite>

@@ -3,11 +3,15 @@ package com.app.testcases;
 import com.app.pom.WebPage_LoginPage;
 import com.app.pom.WebPage_SNHome;
 import com.app.testbase.WebDriverBase;
+import com.app.utils.JSHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
+
+import java.util.Arrays;
 //import org.junit.Test;
 
 
@@ -19,6 +23,7 @@ import ru.yandex.qatools.allure.annotations.Stories;
 @Stories("Set of test that integrate the Smoke suite")
 public class SmokeTest extends WebDriverBase{
 
+    // List of objects that would reference the Pages (views)
 
     WebPage_LoginPage pageLP;
     WebPage_SNHome pageSN;
@@ -35,9 +40,10 @@ public class SmokeTest extends WebDriverBase{
         initPageObject();
     }*/
 
-    /*
+
     @Override
     protected void initPageObject(){
+        /*
         try{
             pageLP = new WebPage_LoginPage(WebDriverBase.getDriver(), WebDriverBase.getDriver().getCurrentUrl());
             _pageObject = pageLP;
@@ -45,8 +51,8 @@ public class SmokeTest extends WebDriverBase{
             logger.info("Context", Arrays.toString(e.getStackTrace()));
             throw new RuntimeException();
 
-        }
-    }*/
+        }*/
+    }
 
     /*
     private void initPage(){
@@ -59,20 +65,22 @@ public class SmokeTest extends WebDriverBase{
         }
     }*/
 
-    /*
-    @BeforeMethod
+
+    //@BeforeMethod
     public void injectJQ(){
-        JSHelper.injectJQ(WebDriverBase.getDriver());
+        JSHelper.injectJQ(WebDriverBase.getThreadDriver());
         //JSHelper.injectUS(_driver);
         logger.info("Happening Before Test");
-        JSHelper.forceJQ(WebDriverBase.getDriver());
-    }*/
+        JSHelper.forceJQ(WebDriverBase.getThreadDriver());
+    }
 
 
     @org.junit.Test
     @Test (groups = {"SmokeSuite"}, testName = "Redirection Login to Kohl's from web")
     public void KohlsLoginFromWeb(){
-        WebDriverBase.getDriver().get(websiteUrl);
+        WebDriverBase.getThreadDriver().get(websiteUrl);
+        initPageObject();
+        injectJQ();
         pageLP.doLogin(userName, password);
         /*
         if (getDriver().getCurrentUrl().toLowerCase().toString() == "https://kohls.service-now.com/nav_to.do?uri=%2Fhome.do"){
@@ -87,7 +95,7 @@ public class SmokeTest extends WebDriverBase{
     @Test(groups={"SmokeSuite", "ServiceNow"}, description = "Looking for the Home Page Elements of the Service Now Home Page", dependsOnMethods = "KohlsLoginFromWeb", testName = "Playing at Service Now Site")
     public void ServiceNowNavigation(){
         //initPage();
-        WebDriverBase.getDriver().get(websiteUrl);
+        WebDriverBase.getThreadDriver().get(websiteUrl);
         pageLP.doLogin(userName, password);
         pageSN.findItLink();
         pageSN.serviceCatalog();
@@ -98,7 +106,7 @@ public class SmokeTest extends WebDriverBase{
     @Test (groups = {"SmokeSuite"}, dependsOnMethods = "KohlsLoginFromWeb")
     public void DemoFailureTest(){
         //initPage();
-        WebDriverBase.getDriver().get(websiteUrl);
+        WebDriverBase.getThreadDriver().get(websiteUrl);
         pageLP.doLogin(userName, password);
         pageSN.mustFail();
     }

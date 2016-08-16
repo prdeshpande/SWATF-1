@@ -11,42 +11,45 @@ import org.testng.annotations.BeforeClass;
  * Created by Oscar Garcia on 8/2/2016.
  */
 public class WebDriverBase {
-    static ThreadLocal<WebDriver> threadDriver= new ThreadLocal<>();
+
+
+    private static ThreadLocal<WebDriver> threadDriver= new ThreadLocal<>();
     protected WebDriver _driver;
-    protected String websiteUrl;
+    protected static String websiteUrl;
     protected static String userName;
     protected static String password;
 
     public static final PropertyLoader property= new PropertyLoader();
-
-
     private final static Logger logger = LoggerFactory.getLogger(WebDriverBase.class);
 
+
+    public static WebDriver getThreadDriver() {
+        return threadDriver.get();
+    }
+
+    public static void setThreadDriver(WebDriver driver) {
+        threadDriver.set(driver);
+        websiteUrl = property.loadProperty("site.url");
+    }
+    /*
     @BeforeClass
     public void init()  {
         userName = property.loadProperty("username.value");
         password = property.loadProperty("password.value");
         websiteUrl = property.loadProperty("site.url");
-    }
+    }*/
 
     // Implementation of page object
     protected PageObject _pageObject;
 
-    public  static WebDriver getDriver(){
-        return threadDriver.get();
-    }
 
-    public static void setDriver(WebDriver driver){
-        threadDriver.set(driver);
-        getDriver().manage().window().maximize();
-    }
 
     /*
     * This method is empty to be Override
      */
     protected void initPageObject(){}
 
-
+    /*
     @AfterClass(alwaysRun = true)
     public void tearDown(){
         _driver = WebDriverBase.getDriver();
@@ -54,5 +57,5 @@ public class WebDriverBase {
             _driver.quit();
         }
 
-    }
+    }*/
 }

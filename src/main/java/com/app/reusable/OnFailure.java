@@ -46,7 +46,8 @@ public class OnFailure extends TestListenerAdapter{
         File screenshot = new File(imgPath);
             try {
                 FileOutputStream screenshotStream = new FileOutputStream(screenshot, false);
-                WebDriver augmentedDriver = new Augmenter().augment((((WebDriverBase)tr.getInstance()).getDriver()));
+                //WebDriver augmentedDriver = new Augmenter().augment((((WebDriverBase)tr.getInstance()).getDriver()));
+                WebDriver augmentedDriver = new Augmenter().augment((WebDriverBase.getThreadDriver()));
                 byte[] bytes = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.BYTES);
                 screenshotStream.write(bytes);
                 screenshotStream.close();
