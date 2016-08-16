@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3d8cf7cd-f1fb-4951-9117-5adf452ab00d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/app/reusable/Component.java" afterPath="$PROJECT_DIR$/src/main/java/com/app/reusable/Component.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/app/testbase/WebDriverBase.java" afterPath="$PROJECT_DIR$/src/main/java/com/app/testbase/WebDriverBase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/app/utils/JSHelper.java" afterPath="$PROJECT_DIR$/src/main/java/com/app/utils/JSHelper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/SWATF.properties" afterPath="$PROJECT_DIR$/src/main/resources/SWATF.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/app/testcases/SmokeTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/app/testcases/SmokeTest.java" />
     </list>
     <ignored path="SWATF.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,8 +28,8 @@
       <file leaf-file-name="WebDriverBase.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/app/testbase/WebDriverBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="424">
-              <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+            <state relative-caret-position="441">
+              <caret line="106" column="9" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -918,7 +914,14 @@
       <option name="project" value="LOCAL" />
       <updated>1471312333761</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Driver as Thread">
+      <created>1471325638630</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1471325638630</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1000,7 +1003,8 @@
     <MESSAGE value="Base" />
     <MESSAGE value="Updates on Test SmokeSuite to have Allure Report" />
     <MESSAGE value="Updates to use getDriver to pass the WebDriver in preparation for Thread" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updates to use getDriver to pass the WebDriver in preparation for Thread" />
+    <MESSAGE value="Driver as Thread" />
+    <option name="LAST_COMMIT_MESSAGE" value="Driver as Thread" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1331,8 +1335,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/app/testbase/WebDriverBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+        <state relative-caret-position="441">
+          <caret line="106" column="9" selection-start-line="106" selection-start-column="9" selection-end-line="106" selection-end-column="9" />
           <folding />
         </state>
       </provider>

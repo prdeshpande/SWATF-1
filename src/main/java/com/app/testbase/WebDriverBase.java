@@ -105,5 +105,6 @@ public class WebDriverBase {
         if (_driver != null) {
             _driver.quit();
         }
+
     }
 }
