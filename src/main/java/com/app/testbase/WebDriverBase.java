@@ -19,6 +19,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Oscar Garcia on 8/2/2016.
  */
 public class WebDriverBase {
+    static ThreadLocal<WebDriver> threadDriver= new ThreadLocal<>();
     protected WebDriver _driver;
     protected String websiteUrl;
     protected String hubUrl;
@@ -62,7 +63,6 @@ public class WebDriverBase {
             case BROWSER_FIREFOX:
                 //firefoxBin = property.loadProperty("firefox.binary");
                 desiredCapabilities = DesiredCapabilities.firefox();
-                //desiredCapabilities.setCapability("firefox.binary", firefoxBin);
                 break;
             case BROWSER_PHANTOMJS: desiredCapabilities = DesiredCapabilities.phantomjs(); break;
             default:
@@ -73,22 +73,24 @@ public class WebDriverBase {
         desiredCapabilities.setCapability("takesScreenshot", false);
         desiredCapabilities.setBrowserName(desiredCapabilities.getBrowserName());
 
-        logger.info("The WebDriver is running on the following web browser: "+desiredCapabilities.getBrowserName());
+        logger.info("The WebDriver is running on the following web browser: "+(desiredCapabilities.getBrowserName()).toUpperCase());
 
         try {
-            _driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
+            threadDriver.set(new RemoteWebDriver(new URL(hubUrl), desiredCapabilities));
+            //_driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);
         } catch (MalformedURLException e) {
-            logger.info("Context", Arrays.toString(e.getStackTrace()));
+            logger.info("Context",Arrays.toString(e.getStackTrace()));
         }
-        _driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        _driver.manage().window().maximize();
+        getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        getDriver().manage().window().maximize();
     }
 
     // Implementation of page object
     protected PageObject _pageObject;
 
-    public  WebDriver getDriver(){
-        return _driver;
+    public  static WebDriver getDriver(){
+        return threadDriver.get();
+        //return _driver;
     }
 
     /*
@@ -99,8 +101,8 @@ public class WebDriverBase {
 
     @AfterClass(alwaysRun = true)
     public void tearDown(){
+        _driver = WebDriverBase.getDriver();
         if (_driver != null) {
-            _driver.close();
             _driver.quit();
         }
     }

@@ -1,23 +1,16 @@
 package com.app.utils;
 
 
-import com.app.reusable.Component;
 import com.google.common.base.Charsets;
-import com.google.common.base.Function;
 import com.google.common.io.Resources;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Oscar Garcia on 8/2/2016.
@@ -68,7 +61,7 @@ public class JSHelper {
         try {
             injectJS(driver, "return true","jquery.js");
         } catch (IOException e) {
-            logger.info("Context", Arrays.toString(e.getStackTrace()));
+            logger.error("Context", Arrays.toString(e.getStackTrace()));
         }
     }
     /*public static void injectJS (WebDriver driver, String jqueryString) throws IOException{

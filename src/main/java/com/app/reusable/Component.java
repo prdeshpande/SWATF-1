@@ -66,8 +66,6 @@ public abstract class Component {
             logger.info("--------------------------------------------");
             logger.info("No element found visible");
             logger.info("--------------------------------------------");
-            logger.info("Injecting JQuery and trying again");
-            logger.info("--------------------------------------------");
             return retryFunction();
         }
     }
@@ -115,11 +113,12 @@ public abstract class Component {
            checker =wait
                    .withTimeout(this.getWait(), TimeUnit.SECONDS)
                    .ignoring(WebDriverException.class)
-                   .pollingEvery(450, TimeUnit.MILLISECONDS)
+                   .pollingEvery(250, TimeUnit.MILLISECONDS)
                    .until(new Function<Component, Boolean>() {
                        public Boolean apply(Component c) {
                            String js = "return $('"+getFullQuery()+"').is(':visible');";
-                           logger.info("Searching for element: $('"+getFullQuery()+"').is(':visible')");
+                           logger.info("Searching for element: "+getFullQuery());
+                           logger.info("Jquery string for manual try: "+"$('"+getFullQuery()+"').is(':visible')");
                            return (Boolean) ((JavascriptExecutor) _driver).executeScript(js);
                        }
                    });

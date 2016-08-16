@@ -12,6 +12,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
+
+import java.util.Arrays;
 //import org.junit.Test;
 
 
@@ -43,9 +45,9 @@ public class SmokeTest extends WebDriverBase{
         try{
             pageLP = new WebPage_LoginPage(getDriver(), getDriver().getCurrentUrl());
             _pageObject = pageLP;
-            _pageObject.load();
+           // _pageObject.load();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
             throw new RuntimeException();
         }
     }
@@ -54,8 +56,8 @@ public class SmokeTest extends WebDriverBase{
         try{
             pageSN = new WebPage_SNHome(getDriver(), getDriver().getCurrentUrl());
             _pageObject = pageSN;
-        }catch (Exception ex){
-            ex.printStackTrace();
+        }catch (Exception e){
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
             throw new RuntimeException();
         }
     }
@@ -72,7 +74,7 @@ public class SmokeTest extends WebDriverBase{
     @org.junit.Test
     @Test (groups = {"SmokeSuite"}, testName = "Redirection Login to Kohl's from web")
     public void KohlsLoginFromWeb(){
-        if (_driver.getCurrentUrl().toLowerCase().toString() == "https://kohls.service-now.com/nav_to.do?uri=%2Fhome.do"){
+        if (getDriver().getCurrentUrl().toLowerCase().toString() == "https://kohls.service-now.com/nav_to.do?uri=%2Fhome.do"){
             // This is to skip login process if no redirection (Kohl's domain)
             Assert.assertTrue(true);
         }else {
