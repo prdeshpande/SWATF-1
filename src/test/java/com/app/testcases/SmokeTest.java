@@ -1,9 +1,13 @@
 package com.app.testcases;
 
+import com.app.testbase.DummyPage;
 import com.app.pom.WebPage_LoginPage;
 import com.app.pom.WebPage_SNHome;
+import com.app.testbase.DummyPage;
+import com.app.testbase.PageObject;
 import com.app.testbase.WebDriverBase;
 import com.app.utils.JSHelper;
+import org.apache.tools.ant.taskdefs.ManifestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.BeforeMethod;
@@ -11,6 +15,9 @@ import org.testng.annotations.Test;
 import ru.yandex.qatools.allure.annotations.Features;
 import ru.yandex.qatools.allure.annotations.Stories;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 //import org.junit.Test;
 
@@ -25,10 +32,17 @@ public class SmokeTest extends WebDriverBase{
 
     // List of objects that would reference the Pages (views)
 
-    WebPage_LoginPage pageLP;
-    WebPage_SNHome pageSN;
+    WebPage_LoginPage pageLP= null;
+    WebPage_SNHome pageSN = null;
+
+
+
+    private Object obj=null;
 
     private final static Logger logger = LoggerFactory.getLogger(SmokeTest.class);
+
+    public SmokeTest() throws IOException {
+    }
 
     /*
     @BeforeClass
@@ -42,16 +56,48 @@ public class SmokeTest extends WebDriverBase{
 
 
     @Override
-    protected void initPageObject(){
-        /*
-        try{
-            pageLP = new WebPage_LoginPage(WebDriverBase.getDriver(), WebDriverBase.getDriver().getCurrentUrl());
-            _pageObject = pageLP;
-        } catch (Exception e) {
-            logger.info("Context", Arrays.toString(e.getStackTrace()));
-            throw new RuntimeException();
+    protected <E> void initPageObject(E page){
 
-        }*/
+        E myObjClass = page;
+        obj = myObjClass;
+
+        try {
+            myObjClass.getClass().getMethod("initObjects").invoke(myObjClass);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected <E> void performMethod(E page, String meth){
+        E myObjClass = page;
+        try {
+
+for(Method me: myObjClass.getClass().getDeclaredMethods()){
+    System.out.println(me.getName());
+               if( me.getName().contains(meth))
+                   myObjClass.getClass().getMethod((meth)).invoke(myObjClass);;
+            }
+
+
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Object getObj() {
+        return obj;
+    }
+
+    public void setObj(Object obj) {
+        this.obj = obj;
     }
 
     /*
@@ -77,26 +123,25 @@ public class SmokeTest extends WebDriverBase{
 
     @org.junit.Test
     @Test (groups = {"SmokeSuite"}, testName = "Redirection Login to Kohl's from web")
-    public void KohlsLoginFromWeb(){
+    public void KohlsLoginFromWeb() throws IOException {
+        //Open URL
         WebDriverBase.getThreadDriver().get(websiteUrl);
-        initPageObject();
+        // Initialize the page object
+        pageLP= new WebPage_LoginPage(WebDriverBase.getThreadDriver(), WebDriverBase.getThreadDriver().getCurrentUrl());
+        // Method to init the new page and apply the approach
+        initPageObject(pageLP.getClass());
         injectJQ();
-        pageLP.doLogin(userName, password);
-        /*
-        if (getDriver().getCurrentUrl().toLowerCase().toString() == "https://kohls.service-now.com/nav_to.do?uri=%2Fhome.do"){
-            // This is to skip login process if no redirection (Kohl's domain)
-            Assert.assertTrue(true);
-        }else {
+        performMethod(pageLP.getClass(),"doLogin");
 
-        }*/
     }
 
+    /*
     @org.junit.Test
     @Test(groups={"SmokeSuite", "ServiceNow"}, description = "Looking for the Home Page Elements of the Service Now Home Page", dependsOnMethods = "KohlsLoginFromWeb", testName = "Playing at Service Now Site")
     public void ServiceNowNavigation(){
         //initPage();
         WebDriverBase.getThreadDriver().get(websiteUrl);
-        pageLP.doLogin(userName, password);
+
         pageSN.findItLink();
         pageSN.serviceCatalog();
         pageSN.homeLink();
@@ -107,10 +152,10 @@ public class SmokeTest extends WebDriverBase{
     public void DemoFailureTest(){
         //initPage();
         WebDriverBase.getThreadDriver().get(websiteUrl);
-        pageLP.doLogin(userName, password);
+
         pageSN.mustFail();
     }
-
+    */
 
 
 }

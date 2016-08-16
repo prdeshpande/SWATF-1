@@ -51,8 +51,10 @@ public class PageObject {
      * @throws InterruptedException
      */
     public void load() throws IOException, InterruptedException {
-        JSHelper.injectJQ(_driver);
-        Thread.sleep(2000);
+        JSHelper.injectJQ(WebDriverBase.getThreadDriver());
+        //JSHelper.injectUS(_driver);
+        logger.info("Happening Before Test");
+        JSHelper.forceJQ(WebDriverBase.getThreadDriver());
     }
 
 }

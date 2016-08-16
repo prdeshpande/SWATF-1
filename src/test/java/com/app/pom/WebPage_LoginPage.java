@@ -3,6 +3,7 @@ package com.app.pom;
 import com.app.objects.Button;
 import com.app.objects.TextField;
 import com.app.testbase.PageObject;
+import com.app.utils.PropertyLoader;
 import org.openqa.selenium.WebDriver;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -18,9 +19,14 @@ public class WebPage_LoginPage extends PageObject{
     private TextField password;
     private Button  submit;
 
+    protected static String userNameProp;
+    protected static String passwordProp;
+
+    public static final PropertyLoader property= new PropertyLoader();
+
+
     public WebPage_LoginPage(WebDriver driver, String url) throws IOException {
         super(driver, url);
-        initObjects();
     }
 
     @Step ("Step 1: Objects initialization")
@@ -32,9 +38,11 @@ public class WebPage_LoginPage extends PageObject{
     }
 
     @Step ("Step 2: Perform login process")
-    public void doLogin(String value1, String value2){
-        username.sendKeys(value1);
-        password.sendKeys(value2);
+    public void doLogin(){
+        userNameProp = property.loadProperty("username.value");
+        passwordProp = property.loadProperty("password.value");
+        username.sendKeys(userNameProp);
+        password.sendKeys(passwordProp);
         submit.click();
     }
 
