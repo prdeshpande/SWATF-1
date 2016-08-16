@@ -1,6 +1,5 @@
 package com.app.testcases;
 
-import com.app.pom.DummyClass;
 import com.app.pom.WebPage_LoginPage;
 import com.app.pom.WebPage_SNHome;
 import com.app.testbase.WebDriverBase;
@@ -25,7 +24,6 @@ import ru.yandex.qatools.allure.annotations.Stories;
 public class SmokeTest extends WebDriverBase{
 
 
-    DummyClass dummyPage;
     WebPage_LoginPage pageLP;
     WebPage_SNHome pageSN;
 
@@ -34,7 +32,8 @@ public class SmokeTest extends WebDriverBase{
     @BeforeClass
     public void testInit(){
         // Load of the initial Web URL
-        _driver.get(websiteUrl);
+        getDriver().get(websiteUrl);
+        //_driver.get(websiteUrl);
         // Initialization of the page to create the objects
         initPageObject();
     }
@@ -42,7 +41,7 @@ public class SmokeTest extends WebDriverBase{
     @Override
     protected void initPageObject(){
         try{
-            pageLP = new WebPage_LoginPage(_driver, _driver.getCurrentUrl());
+            pageLP = new WebPage_LoginPage(getDriver(), getDriver().getCurrentUrl());
             _pageObject = pageLP;
             _pageObject.load();
         } catch (Exception e) {
@@ -53,7 +52,7 @@ public class SmokeTest extends WebDriverBase{
 
     private void initPage(){
         try{
-            pageSN = new WebPage_SNHome(_driver, _driver.getCurrentUrl());
+            pageSN = new WebPage_SNHome(getDriver(), getDriver().getCurrentUrl());
             _pageObject = pageSN;
         }catch (Exception ex){
             ex.printStackTrace();
@@ -63,10 +62,10 @@ public class SmokeTest extends WebDriverBase{
 
     @BeforeMethod
     public void injectJQ(){
-        JSHelper.injectJQ(_driver);
+        JSHelper.injectJQ(getDriver());
         //JSHelper.injectUS(_driver);
         logger.info("Happening Before Test");
-        JSHelper.forceJQ(_driver);
+        JSHelper.forceJQ(getDriver());
     }
 
 

@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -59,17 +58,14 @@ public class WebDriverBase {
                 options.addArguments("disable-popup-blocking");
                 desiredCapabilities = DesiredCapabilities.chrome();
                 desiredCapabilities.setCapability("chrome.binary", chromeBinary);
-                logger.info("Chrome browser selected");
                 break;
             case BROWSER_FIREFOX:
                 //firefoxBin = property.loadProperty("firefox.binary");
                 desiredCapabilities = DesiredCapabilities.firefox();
                 //desiredCapabilities.setCapability("firefox.binary", firefoxBin);
-                logger.debug("Firefox browser selected");
                 break;
             case BROWSER_PHANTOMJS: desiredCapabilities = DesiredCapabilities.phantomjs(); break;
             default:
-                logger.debug("Could not find any supported browser");
                 throw new IllegalArgumentException("Could not find supported browser: " + browserName);
         }
 
@@ -77,7 +73,7 @@ public class WebDriverBase {
         desiredCapabilities.setCapability("takesScreenshot", false);
         desiredCapabilities.setBrowserName(desiredCapabilities.getBrowserName());
 
-        logger.info(desiredCapabilities.getBrowserName());
+        logger.info("The WebDriver is running on the following web browser: "+desiredCapabilities.getBrowserName());
 
         try {
             _driver = new RemoteWebDriver(new URL(hubUrl), desiredCapabilities);

@@ -50,6 +50,7 @@ public abstract class Component {
      * Get the WebElement using JQuery to be pass to WebDriver
      */
     public WebElement getElement() {
+        // it would search for the element on the UI
         if (waitForRendered()){
             String xp = null;
             try {

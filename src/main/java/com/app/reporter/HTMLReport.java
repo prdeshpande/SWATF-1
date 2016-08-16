@@ -12,7 +12,10 @@ import java.util.Arrays;
 
 /**
  * Created by Oscar Garcia on 8/2/2016.
+ * This is not implemented
  */
+
+
 public class HTMLReport {
 
     private final static Logger logger = LoggerFactory.getLogger(JSHelper.class);
