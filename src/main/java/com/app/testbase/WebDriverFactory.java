@@ -7,6 +7,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.yandex.qatools.allure.annotations.Step;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,6 +31,7 @@ public class WebDriverFactory {
     public static final PropertyLoader property= new PropertyLoader();
     private final static Logger logger = LoggerFactory.getLogger(PropertyLoader.class);
 
+    @Step ("Creation of the WebDriver based on the browser name property")
     static WebDriver createInstance(String browserName){
         WebDriver driver=null;
 
@@ -63,11 +65,11 @@ public class WebDriverFactory {
         }
         try {
             driver = (new RemoteWebDriver(new URL(hubUrl), desiredCapabilities));
+            logger.info("Thread id = "+ Thread.currentThread().getId());
+            logger.info("Hashcode of Web Driver: "+ driver.hashCode());
         } catch (MalformedURLException e) {
             logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
         return driver;
     }
-
-
 }

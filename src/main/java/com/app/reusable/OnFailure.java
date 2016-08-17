@@ -39,7 +39,7 @@ public class OnFailure extends TestListenerAdapter{
 
 
     @Attachment(value = "Screenshot Captured on failure !!", type = "image/png")
-    public byte[] screenCapture(ITestResult tr){
+    private byte[] screenCapture(ITestResult tr){
 
         String imgPath = "./target/" + tr.getName() + ".png";
         //String path = tr.getName() + ".png";
@@ -47,7 +47,7 @@ public class OnFailure extends TestListenerAdapter{
             try {
                 FileOutputStream screenshotStream = new FileOutputStream(screenshot, false);
                 //WebDriver augmentedDriver = new Augmenter().augment((((WebDriverBase)tr.getInstance()).getDriver()));
-                WebDriver augmentedDriver = new Augmenter().augment((WebDriverBase.getThreadDriver()));
+                WebDriver augmentedDriver = new Augmenter().augment(WebDriverBase.getThreadDriver());
                 byte[] bytes = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.BYTES);
                 screenshotStream.write(bytes);
                 screenshotStream.close();

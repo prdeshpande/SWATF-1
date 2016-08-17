@@ -14,7 +14,7 @@ public abstract class WebDriverBase {
 
 
     private static ThreadLocal<WebDriver> threadDriver= new ThreadLocal<>();
-    protected WebDriver _driver;
+
     protected static String websiteUrl;
 
 
@@ -40,9 +40,10 @@ public abstract class WebDriverBase {
     /*
     * This method is empty to be Override
      */
+    /*
     protected <E> void initPageObject(Class <E> E){}
 
     protected abstract <E> void initPageObject(E page);
-
+    */
 
 }

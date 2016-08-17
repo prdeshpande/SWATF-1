@@ -27,6 +27,7 @@ public class WebPage_LoginPage extends PageObject{
 
     public WebPage_LoginPage(WebDriver driver, String url) throws IOException {
         super(driver, url);
+        initObjects();
     }
 
     @Step ("Step 1: Objects initialization")
