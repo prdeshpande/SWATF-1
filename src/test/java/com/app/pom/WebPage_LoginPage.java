@@ -5,6 +5,8 @@ import com.app.objects.TextField;
 import com.app.testbase.PageObject;
 import com.app.utils.PropertyLoader;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.yandex.qatools.allure.annotations.Step;
 
 import java.io.IOException;
@@ -19,10 +21,11 @@ public class WebPage_LoginPage extends PageObject{
     private TextField password;
     private Button  submit;
 
-    protected static String userNameProp;
-    protected static String passwordProp;
+    protected String userNameProp;
+    protected String passwordProp;
 
     public static final PropertyLoader property= new PropertyLoader();
+    private final static Logger logger = LoggerFactory.getLogger(WebPage_LoginPage.class);
 
 
     public WebPage_LoginPage(WebDriver driver, String url) throws IOException {
@@ -32,7 +35,7 @@ public class WebPage_LoginPage extends PageObject{
 
     @Step ("Step 1: Objects initialization")
     public void initObjects(){
-
+        logger.info("Initialization of page objects executed");
         username = new TextField(_driver,"input#form-username",null);
         password = new TextField(_driver,"input#form-password",null);
         submit = new Button(_driver,"input#btnSubmit.button",null);

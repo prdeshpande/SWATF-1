@@ -41,7 +41,7 @@ public class OnFailure extends TestListenerAdapter{
     @Attachment(value = "Screenshot Captured on failure !!", type = "image/png")
     private byte[] screenCapture(ITestResult tr){
 
-        String imgPath = "./target/" + tr.getName() + ".png";
+        String imgPath = "./target/" + tr.getName() + "_OnFailure.png";
         //String path = tr.getName() + ".png";
         File screenshot = new File(imgPath);
             try {

@@ -40,7 +40,7 @@ public class OnSuccess extends TestListenerAdapter {
     @Attachment(value = "Screenshot Captured on Success !!", type = "image/png")
     public byte[] screenCapture(ITestResult tr) {
 
-        String imgPath = "./target/" + tr.getName() + ".png";
+        String imgPath = "./target/" + tr.getName() + "_OnSuccess.png";
         //String path = tr.getName() + ".png";
         File screenshot = new File(imgPath);
         try {

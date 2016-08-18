@@ -1,5 +1,5 @@
 projectKey=org.sonarqube:java-swatf
 serverUrl=http://localhost:9000
 dashboardUrl=http://localhost:9000/dashboard/index/org.sonarqube:java-swatf
-ceTaskId=AVZjQYXjJJQ6MxJ_bXw8
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVZjQYXjJJQ6MxJ_bXw8
+ceTaskId=AVaeA7HJSXJPmsRbVbat
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVaeA7HJSXJPmsRbVbat

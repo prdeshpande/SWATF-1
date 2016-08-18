@@ -14,7 +14,6 @@ import ru.yandex.qatools.allure.annotations.Stories;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.Class;
 import java.util.Arrays;
 //import org.junit.Test;
 
@@ -39,7 +38,7 @@ public class SmokeTest extends WebDriverBase{
 
     protected <E> void performMethod(E page, String meth) throws ClassNotFoundException {
         E myObjClass = page;
-        Class _class = null;
+        Class _class;
         _class = Class.forName(page.getClass().getName());
         ;
         try {
@@ -50,11 +49,11 @@ public class SmokeTest extends WebDriverBase{
                    myObjClass.getClass().getMethod((meth)).invoke(myObjClass);;
             }
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            logger.info("Context", Arrays.toString(e.getStackTrace()));
         }
     }
 
@@ -86,9 +85,10 @@ public class SmokeTest extends WebDriverBase{
         WebDriverBase.getThreadDriver().get(websiteUrl);
         // Initialize the page object
         pageLP= new WebPage_LoginPage(WebDriverBase.getThreadDriver(), WebDriverBase.getThreadDriver().getCurrentUrl());
-        _pageObject = pageLP;
+        //_pageObject = pageLP;
         // Method to init the new page and apply the approach
         injectJQ();
+        //performMethod(pageLP.getClass(),"doLogin");
         pageLP.doLogin();
     }
 

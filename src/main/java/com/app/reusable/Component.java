@@ -52,7 +52,7 @@ public abstract class Component {
     public WebElement getElement() {
         // it would search for the element on the UI
         if (waitForRendered()){
-            String xp = null;
+            String xp;
             try {
                 logger.info("Returning XPath...");
                 xp = returnXpath(_driver,"buildXpath.js");
@@ -125,7 +125,7 @@ public abstract class Component {
            return checker;
        }catch (TimeoutException e){
            logger.info("Context", Arrays.toString(e.getStackTrace()));
-           return checker;
+           return false;
        }
     }
 

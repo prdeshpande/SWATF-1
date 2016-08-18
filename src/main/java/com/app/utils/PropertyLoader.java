@@ -17,7 +17,7 @@ public class PropertyLoader {
 
 
 	public String loadProperty(String property) {
-		ResourceBundle _prop = null;
+		ResourceBundle _prop;
 		String value=null;
 		try{
 			_prop = ResourceBundle.getBundle("SWATF");
